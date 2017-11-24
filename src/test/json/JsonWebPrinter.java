@@ -37,6 +37,7 @@ public class JsonWebPrinter {
 				System.out.println("-----------------------------");
 				StringBuilder sb = new StringBuilder();
 				printJson(jsonObj, 0, 0, sb);
+				System.out.println(sb.toString());
 			} catch (Exception e) {
 				System.out.println("请输入正确格式的json字符串 ! ");
 				e.printStackTrace();
@@ -53,20 +54,28 @@ public class JsonWebPrinter {
 	 */
 	private static void printJson(Object obj, int tblNum, int arrNum, StringBuilder resultStr) throws Exception {
 		if (obj instanceof String) {
-
-			System.out.println("\"" + obj + "\"");
+//			System.out.println("\"" + obj + "\"");
+			resultStr.append('"').append(obj).append("\"\n");
 		} else if (obj instanceof JSONObject) {
-			System.out.println();
+//			System.out.println();
+			if (arrNum < 2)
+				resultStr.append('\n');
 			if (arrNum > 0) {
-				printTable(tblNum);
-				System.out.println("array[" + arrNum + "]");
+				String tbl = printTable(tblNum);
+				if (tbl != null)
+					resultStr.append(tbl);
+//				System.out.println("array[" + arrNum + "]");s
+				resultStr.append("array[").append(arrNum).append("]\n");
 			}
 			JSONObject jsonObj = (JSONObject) obj;
 			for (Map.Entry<String, Object> entry : jsonObj.entrySet()) {
 				String key = entry.getKey();
-				printTable(tblNum);
+				String tbl = printTable(tblNum);
+				if (tbl != null)
+					resultStr.append(tbl);
 				Object value = entry.getValue();
-				System.out.print(key + " : ");
+//				System.out.print(key + " : ");
+				resultStr.append(key).append(" : ");
 				printJson(value, tblNum + 1, arrNum, resultStr);
 			}
 		} else if (obj instanceof JSONArray) {
@@ -79,8 +88,14 @@ public class JsonWebPrinter {
 		}
 	}
 	
-	private static void printTable(int num) {
-		for (int i = 0; i < num; i++)
-			System.out.print("----");
+	private static String printTable(int num) {
+		if (num > 0) {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < num; i++)
+//				System.out.print("----");
+				sb.append("====");
+			return sb.toString();
+		}
+		return null;
 	}
 }
