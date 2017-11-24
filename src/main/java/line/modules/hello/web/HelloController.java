@@ -13,7 +13,7 @@ public class HelloController {
 		
 		String text = "this is text from controller!";
 		mv.addObject("hello", text);
-		mv.setViewName("hello");
+		mv.setViewName("/hello/hello");
 		
 		return mv;
 	}
