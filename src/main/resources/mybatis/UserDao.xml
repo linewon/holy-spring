@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="line.modules.user.dao.UserDao">
+    <resultMap id="User" type="line.modules.user.entity.User">
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="credits" column="credits" jdbcType="INTEGER"/>
+        <result property="lastIp" column="last_ip" jdbcType="VARCHAR"/>
+        <result property="lastLoginDate" column="last_login_datetime" jdbcType="DATE"/>
+    </resultMap>
+
+    <select id="findByName" parameterType="java.lang.String" resultMap="User">
+        SELECT * from user WHERE user_name = #{userName}
+    </select>
+</mapper>
