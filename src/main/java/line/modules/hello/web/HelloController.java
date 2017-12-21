@@ -11,7 +11,9 @@ public class HelloController {
 	public ModelAndView hello() {
 		ModelAndView mv = new ModelAndView();
 		
-		String text = "this is text from controller!";
+//		String text = "this is text from controller!";
+		String text = "<context-param><param-name>contextConfigLocation</param-name><param-value>classpath:applicationContext.xml</param-value></context-param>";
+		
 		mv.addObject("hello", text);
 		mv.setViewName("/hello/hello");
 		

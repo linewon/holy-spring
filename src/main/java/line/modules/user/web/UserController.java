@@ -29,4 +29,17 @@ public class UserController {
 		mv.setViewName("/user/userInfo");
 		return mv;
 	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public ModelAndView test(String userName, String password) {
+		ModelAndView mv = new ModelAndView();
+		User user = new User();
+		user.setUserName(userName);
+		user.setPassWord(password);
+		String userInfo = JSON.toJSONString(user);
+		System.out.println(userInfo);
+		mv.addObject("user", userInfo);
+		mv.setViewName("/user/userInfo");
+		return mv;
+	}
 }

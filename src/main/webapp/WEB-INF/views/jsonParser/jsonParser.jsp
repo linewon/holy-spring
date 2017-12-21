@@ -11,6 +11,8 @@
     	<textarea id="inputJson"></textarea>
     	<textarea id="outputString"></textarea>
     	<button id="parseJson">CLICK</button>
+    	<br />
+    	<button id="xml">XML</button>
  	</body>
  	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
  	<script>
@@ -22,6 +24,16 @@
  					data: {
  						inputJson: $("#inputJson").val()
  					},
+ 					success: function(respData) {
+ 						$("#outputString").val(respData);
+ 					}
+ 				});
+ 			});
+ 			
+ 			$("#xml").on("click", function() {
+ 				$.ajax({
+ 					type:"get",
+ 					url:"${ctx}/jsonParser/xmlString",
  					success: function(respData) {
  						$("#outputString").val(respData);
  					}

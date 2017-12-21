@@ -36,11 +36,19 @@ public class JsonParserController {
 		
 		String resultStr;
 		try {
-			resultStr = jsonParseservice.parseJson(jsonStr);
+			resultStr = jsonParseservice.formatJson(jsonStr);
 		} catch (Exception e) {
 			e.printStackTrace();
 			resultStr = e.getMessage();
 		}
+		return resultStr;
+	}
+	
+	@RequestMapping(value="/xmlString", method=RequestMethod.GET)
+	@ResponseBody
+	public String getXml(HttpServletRequest request) {
+		
+		String resultStr = "<context-param><param-name>contextConfigLocation</param-name><param-value>classpath:applicationContext.xml</param-value></context-param>";
 		return resultStr;
 	}
 }
